@@ -1,0 +1,13 @@
+/* Flexbox centering */
+.planner-container {
+    display: flex;                /* Enable flexbox */
+    justify-content: center;      /* Center horizontally */
+    align-items: center;          /* Center vertically */
+    height: 100vh;                /* Make the container take up the full viewport height */
+    margin: 0;                    /* Remove default margin */
+  }
+  
+  .planner-container > div {
+    font-size: 24px; /* Optional, to make the text a little larger */
+  }
+  
