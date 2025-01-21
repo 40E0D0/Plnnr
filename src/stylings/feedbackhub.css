@@ -1,0 +1,124 @@
+/* Ensure styles are scoped within the FeedbackHub component */
+.feedback-hub {
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .feedback-hub h1 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .feedback-hub .form-container {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .feedback-hub .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .feedback-hub label {
+    display: block;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  /* Radio buttons styling */
+  .feedback-hub .radio-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  
+  .feedback-hub .radio-group label {
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .feedback-hub input[type="radio"] {
+    margin-right: 0.5rem;
+  }
+  
+  .feedback-hub select,
+  .feedback-hub textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin-top: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+  }
+  
+  .feedback-hub textarea {
+    min-height: 100px;
+  }
+  
+  .feedback-hub button.submit-btn {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .feedback-hub button.submit-btn:hover {
+    background-color: #45a049;
+  }
+  
+  .feedback-hub .thank-you-message {
+    color: #4CAF50;
+    text-align: center;
+    margin-top: 1rem;
+  }
+  
+  .feedback-hub .feedback-list {
+    margin-top: 2rem;
+  }
+  
+  .feedback-hub .feedback-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .feedback-hub .feedback-item {
+    background-color: #fff;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .feedback-hub .feedback-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .feedback-hub .category {
+    color: #007bff;
+  }
+  
+  .feedback-hub .status {
+    color: #ff9800;
+  }
+  
+  .feedback-hub small {
+    display: block;
+    margin-top: 0.5rem;
+    color: #888;
+  }
+  

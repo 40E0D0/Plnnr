@@ -50,7 +50,7 @@ export default function StudentRegister() {
         return;
     }
     // Checks if all fields are filled
-            const { data, error } = await supabase.auth.signUp(
+            const { data: authData, error: authError } = await supabase.auth.signUp(
                 {
                   email: formData.email,
                   password: formData.password,
@@ -62,16 +62,41 @@ export default function StudentRegister() {
                       institute: formData.institute,
                       phone_no: formData.phoneNo,
                       confirm_password: formData.confirmPassword,
+                      role: 'Student'
                     }
                   }
                 }
-              )
+              );
+
+              if (authError) throw authError;
+
+        // Insert user data into the 'users' table
+        const { data: userData, error: userError } = await supabase
+            .from('users')
+            .insert([
+                {
+                    id: authData.user.id, // Use the user ID from the auth response
+                    full_name: formData.fullName,
+                    student_id: formData.studentID,
+                    level_study: formData.levelStudy,
+                    institute: formData.institute,
+                    email: formData.email,
+                    phone_no: formData.phoneNo,
+                    role: 'Student'
+                }
+            ]);
+
+        if (userError) throw userError;
+
+        // Log the inserted user data
+        console.log("Inserted user data:", userData);
+
               setIsLoading(false)
-              if (error) throw error
               alert("Check your email for a verification link")
 
         } catch (error) {
-            setErrorMessage(error.message)
+            setErrorMessage(error.message);  // Handles the error
+            console.error(error);            // Optionally log the error for debugging
             
         }   finally {
             setIsLoading(false) // Always reset loading state

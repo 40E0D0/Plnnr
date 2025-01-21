@@ -1,0 +1,132 @@
+/* ChatAdvisor.css */
+
+/* Flex container for chat wrapper */
+.chat-wrapper {
+    display: flex;
+  margin: 0 auto; /* Adjusted margin to prevent gap */
+  width: 90%;
+  max-width: 1200px; /* Ensure the wrapper doesn't stretch too wide */
+  height: 100vh; /* Make sure the height takes the full viewable area */
+  box-sizing: border-box; /* To ensure padding and margins are included in the width */
+  }
+  
+  /* Left Panel: List of Students */
+  .chat-wrapper .student-list {
+    width: 25%; /* Adjust width as needed */
+    padding-right: 20px;
+    border-right: 2px solid #ddd;
+    padding-top: 10px;
+  }
+  
+  .chat-wrapper .student-list h3 {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .chat-wrapper .student-list ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .chat-wrapper .student-item {
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+  }
+  
+  .chat-wrapper .student-item:hover {
+    background-color: #f5f5f5;
+  }
+  
+  /* Right Panel: Chat UI */
+  .chat-wrapper .chat-container {
+    width: 70%; /* Adjust width as needed */
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #d9d9d9;
+    border-radius: 10px;
+    margin-top: 0px;
+    padding: auto;
+    border: 1px solid #ddd;
+  }
+  
+  /* Chat Header */
+  .chat-wrapper .chat-header {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Message container */
+  .chat-wrapper .message-container {
+    flex-grow: 1;
+    overflow-y: scroll;
+    padding: 10px;
+    scrollbar-width: none; /* For Firefox to hide the scrollbar */
+  }
+  
+  /* Message bubbles */
+  .chat-wrapper .message-bubble {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 15px;
+    max-width: 50%;
+  }
+  
+  .chat-wrapper .sent {
+    background-color: #6261ae;
+    color: white;
+    margin-left: auto;
+    text-align: left;
+  }
+  
+  .chat-wrapper .received {
+    background-color: #ae6161;
+    color: white;
+  }
+  
+  /* Input area for typing */
+  .chat-wrapper .input-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .chat-wrapper textarea {
+    flex-grow: 1;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #a39c9c;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    resize: none;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+  
+  .chat-wrapper textarea::placeholder {
+    color: black;
+  }
+  
+  .chat-wrapper button {
+    padding: 10px 20px;
+    background-color: #0084ff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .chat-wrapper button:hover {
+    background-color: #006bb3;
+    transition: all;
+  }
+  
+  body {
+    background-color: #d9d9d9;
+  }
+  

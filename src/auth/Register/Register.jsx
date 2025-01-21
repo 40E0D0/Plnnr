@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 export default function Register() {
     return (
-        <main className="flex items-center justify-center h-screen bg-white-900 text-white">
+        <main className="flex items-center justify-center animate-fade-in h-screen bg-white-900 text-white">
             <div className="max-w-xl mx-auto px-8 py-12 bg-white text-black rounded-lg shadow-lg text-center">
                 <h1 className="absolute top-4 left-4 text-2xl font-bold mb-6">Plnnr. | Registration Page</h1>
                 <p className="text-lg mb-6">I am a...</p>
@@ -19,6 +19,11 @@ export default function Register() {
                         to="/register/advisor" 
                         className="bg-gray-300 text-black py-2 px-6 rounded-md hover:bg-blue-700 hover:text-white transition">
                         Lecturer (advisor)
+                    </Link>
+
+                    {/* Back to Login Link */}
+                    <Link to="/" className="text-sm text-blue-600 hover:text-blue-700 underline text-center">
+                            Back to login
                     </Link>
                 </div>
             </div>
