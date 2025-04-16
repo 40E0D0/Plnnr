@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from "../components/Header";
+import Header from "../components/HeaderAdvisor";
 import { supabase } from "../auth/client"; // Make sure your Supabase client is properly imported
 import '../stylings/feedbackhub.css';
 import Footer from '../components/Footer';
@@ -72,15 +72,15 @@ const FeedbackHub = () => {
         }
       ]);
 
-      if (insertError) {
-        console.error('Error submitting feedback:', insertError);
+    if (insertError) {
+      console.error('Error submitting feedback:', insertError);
+    } else {
+      // Ensure data is an array and has at least one item
+      if (data && Array.isArray(data) && data.length > 0) {
+        setSubmittedFeedback((prevFeedback) => [data[0], ...prevFeedback]);
       } else {
-        // Ensure data is an array and has at least one item
-        if (data && Array.isArray(data) && data.length > 0) {
-          setSubmittedFeedback((prevFeedback) => [data[0], ...prevFeedback]);
-        } else {
-          console.error('No feedback data returned:', data);
-        }
+        console.error('No feedback data returned:', data);
+      }
 
       // Reset form fields
       setFeedback('');
@@ -94,72 +94,73 @@ const FeedbackHub = () => {
   return (
     <div>
       <Header handleLogout={handleLogout} />
-      <div className="feedback-hub">
-        <h1 className='font-bold text-2xl mb-4'>Feedback Hub</h1>
+      <div className='content-wrapper'>
+      <h1 className='font-bold text-2xl mb-2 mt-4'>Feedback Hub</h1>
+        <div className="feedback-hub">
 
-        <div className="form-container">
-          <h2>Submit Your Feedback</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label>Category:</label>
-              <div className="radio-group">
-                <label>
-                  <input
-                    type="radio"
-                    value="Bug Report"
-                    checked={category === 'Bug Report'}
-                    onChange={(e) => setCategory(e.target.value)}
-                  />
-                  Bug Report
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    value="Feature Request"
-                    checked={category === 'Feature Request'}
-                    onChange={(e) => setCategory(e.target.value)}
-                  />
-                  Feature Request
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    value="User Experience"
-                    checked={category === 'User Experience'}
-                    onChange={(e) => setCategory(e.target.value)}
-                  />
-                  User Experience
-                </label>
+          <div className="form-container">
+            <h2>Submit Your Feedback</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label>Category:</label>
+                <div className="radio-group">
+                  <label>
+                    <input
+                      type="radio"
+                      value="Bug Report"
+                      checked={category === 'Bug Report'}
+                      onChange={(e) => setCategory(e.target.value)}
+                    />
+                    Bug Report
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      value="Feature Request"
+                      checked={category === 'Feature Request'}
+                      onChange={(e) => setCategory(e.target.value)}
+                    />
+                    Feature Request
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      value="User Experience"
+                      checked={category === 'User Experience'}
+                      onChange={(e) => setCategory(e.target.value)}
+                    />
+                    User Experience
+                  </label>
+                </div>
               </div>
-            </div>
 
-            <div className="form-group">
-              <label htmlFor="feedback">Your Feedback:</label>
-              <textarea
-                id="feedback"
-                value={feedback}
-                onChange={(e) => setFeedback(e.target.value)}
-                placeholder="Describe your feedback..."
-                required
-              />
-              <label htmlFor="email">Your Email Address:</label>
-              <textarea
-                type="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                required
-              />
-            </div>
+              <div className="form-group">
+                <label htmlFor="feedback">Your Feedback:</label>
+                <textarea
+                  id="feedback"
+                  value={feedback}
+                  onChange={(e) => setFeedback(e.target.value)}
+                  placeholder="Describe your feedback..."
+                  required
+                />
+                <label htmlFor="email">Your Email Address:</label>
+                <textarea
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
 
-            <button type="submit" className="submit-btn">Submit Feedback</button>
-          </form>
+              <button type="submit" className="submit-btn">Submit Feedback</button>
+            </form>
 
-          {showThankYou && <p className="thank-you-message">Thank you for your feedback!</p>}
-        </div>
+            {showThankYou && <p className="thank-you-message">Thank you for your feedback!</p>}
+          </div>
 
-        {/* <div className="feedback-list">
+          {/* <div className="feedback-list">
           <h2>Previous Feedback</h2>
           {submittedFeedback.length > 0 ? (
             <ul>
@@ -178,6 +179,7 @@ const FeedbackHub = () => {
             <p>No feedback submitted yet.</p>
           )}
         </div> */}
+        </div>
       </div>
       <Footer />
     </div>

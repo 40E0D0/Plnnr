@@ -8,7 +8,7 @@ const ForgotPassword = () => {
   const handleForgotPassword = async () => {
     try {
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: 'http://localhost:5174/forgot-password', // Replace with your production URL
+        redirectTo: 'http://localhost:5173/forgot-password', // Replace with your production URL
       });
 
       if (error) {
@@ -23,7 +23,7 @@ const ForgotPassword = () => {
 
   return (
     <div className="flex items-center justify-center h-screen animate-fade-in bg-gray-400 text-white">
-      <div className="flex flex-col w-96 bg-white text-black p-6 rounded shadow">
+      <div className="flex flex-col w-96 bg-white text-black p-6 rounded shadow-md">
         <h1 className="text-2xl font-bold mb-4">Looks like you forgot your password.</h1>
         <label className="mb-2 font-medium">Enter your email address here.</label>
         <input
@@ -34,7 +34,7 @@ const ForgotPassword = () => {
         />
         <button
           onClick={handleForgotPassword}
-          className="p-2  text-white rounded bg-blue-700 hover:bg-blue-500"
+          className="p-2  text-white rounded-md bg-blue-700 hover:bg-blue-500"
         >
           Send Reset Link
         </button>

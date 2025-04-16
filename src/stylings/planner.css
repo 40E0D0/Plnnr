@@ -29,24 +29,36 @@
   background-color: white;
   border-radius: 8px;
   overflow: auto;
-  height: calc(100vh - 74px);
+  height: calc(100vh - 77px);
   scrollbar-width: none; /* Hide scrollbar for Firefox */
   -ms-overflow-style: none; /* Hide scrollbar for Edge */
   z-index: 0;
 }
 
 .planner-main-ui {
-  width: 75%;
+  width: 80%;
   float: left;
   padding: 10px;
   overflow: auto;
   height: calc(100vh - 20px);
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for Edge */
 }
 
 .planner-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
+}
+
+.planner-header {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  margin-top: 40px;
+  padding-left: 5px;
+  padding-right: 40px;
 }
 
 .planner-droppable-area {

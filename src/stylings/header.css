@@ -47,6 +47,13 @@
     color: #007bff; /* Change link color on hover */
 }
 
+ul li.active a {
+    color: #83f347;
+    font-weight: bold;
+    border-bottom: 3px solid #6fbd46;
+}
+
+
 /*---------------------------------------------------------------------------------*/
 
 /* Dropdown menu */

@@ -14,8 +14,8 @@ const Chat = () => {
 
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([
-    { sender: "Alice", content: "Sure, let's do it." },
     { sender: "Bob", content: "Hi. Can we discuss here? I think it's kinda easy this way" },
+    { sender: "Alice", content: "Sure, let's do it." },
   ]);
   const [isOnline, setIsOnline] = useState(true);
   const [userName, setUserName] = useState("Bob");

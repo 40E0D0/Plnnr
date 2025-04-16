@@ -1,4 +1,4 @@
-import LoginImage from '../../assets/Auth/Login/plnnr-login-image.svg';
+import LoginImage from '../../assets/Auth/Login/plnnr-logo-text-2.png';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../client';
@@ -55,9 +55,9 @@ export default function Login({ setToken }) {
             } else if (userData) {
                 // Redirect based on user role
                 if (userData.role === "Student") {
-                    navigate("/dashboard/planner"); // Redirect to Student UI
+                    navigate("/dashboard-s"); // Redirect to Student UI
                 } else if (userData.role === "Advisor") {
-                    navigate("dashboard/advisor-planner"); // Redirect to Advisor UI
+                    navigate("dashboard-a"); // Redirect to Advisor UI
                 }
             }
 
@@ -75,7 +75,7 @@ export default function Login({ setToken }) {
         <main className="flex items-center justify-center bg-white h-screen animate-fade-in max-w-[1800px] mx-auto px-10">
             <form onSubmit={handleSubmit}>
                 <div className="flex flex-col lg:flex-row gap-10 justify-center items-center h-full">
-                    <img src={LoginImage} alt="Login" className="w-44 lg:w-96" />
+                    <img src={LoginImage} alt="Login" className="w-34 lg:w-96" />
 
                     {/* Vertical Bar */}
                     <div className="h-1/3 w-[2px] bg-gray-400 hidden lg:block"></div>
@@ -83,7 +83,7 @@ export default function Login({ setToken }) {
                     {/* Login form */}
                     <div className="flex flex-col gap-5">
                         <div className="flex flex-col gap-2">
-                            <h1 className="text-xl">Your Email</h1>
+                            <h1 className="text-l ml-2 font-bold">Your Email</h1>
                             <input
                                 name="email"
                                 type="email"
@@ -93,7 +93,7 @@ export default function Login({ setToken }) {
                             />
                         </div>
                         <div className="flex flex-col gap-2">
-                            <h1 className="text-xl">Your Password</h1>
+                            <h1 className="text-l ml-2 font-bold">Your Password</h1>
                             <input
                                 name="password"
                                 type="password"

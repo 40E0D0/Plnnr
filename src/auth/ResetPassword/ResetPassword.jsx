@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../client';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
 const ResetPassword = () => {
   const [password, setPassword] = useState('');
@@ -66,7 +66,7 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-800 text-white">
+    <div className="flex items-center justify-center h-screen bg-gray-400 text-white">
       <div className="flex flex-col w-96 bg-white text-black p-6 rounded shadow">
         <h1 className="text-2xl font-bold mb-4">Reset Your Password</h1>
         <label className="mb-2 font-medium">New Password</label>
@@ -87,11 +87,15 @@ const ResetPassword = () => {
           onClick={handleResetPassword}
           disabled={isSubmitting}
           className={`p-2 ${
-            isSubmitting ? 'bg-gray-400' : 'bg-gray-500 hover:bg-gray-600'
+            isSubmitting ? 'bg-gray-400' : 'bg-blue-700 hover:bg-blue-500'
           } text-white rounded`}
         >
           {isSubmitting ? 'Setting Password...' : 'Set New Password'}
         </button>
+        {/* Back to Login Link */}
+        <Link to="/" className="text-sm mt-4 text-blue-600 hover:text-blue-700 underline text-center">
+                            Back to login
+                    </Link>
         {message && <p className="mt-4 text-sm text-center">{message}</p>}
       </div>
     </div>

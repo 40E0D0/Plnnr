@@ -116,12 +116,25 @@ export default function StudentRegister() {
                         className="bg-white w-full border border-gray-300 px-4 py-2 rounded-md"
                         onChange={handleChange} />
                     </div>
-                    <div>
+                { /*   <div>
                         <label className="block text-sm font-medium mb-2">Level of study</label>
                         <input name="levelStudy"
                          type="text" 
                          className="bg-white w-full border border-gray-300 px-4 py-2 rounded-md"
                          onChange={handleChange} />
+                    </div> */}
+                    <div>
+                        <label className="block text-sm font-medium mb-2">Level of Study</label>
+                        <select
+                            name="levelStudy"
+                            className="bg-white w-full border border-gray-300 px-4 py-2 rounded-md"
+                            onChange={handleChange}
+                            value={formData.levelStudy}
+                        >
+                            <option value="">Select your level of study</option>
+                            <option value="Bachelor">Bachelor's Degree</option>
+                            {/* Add more departments as needed */}
+                        </select>
                     </div>
                     <div>
                         <label className="block text-sm font-medium mb-2">Student ID*</label>
@@ -131,11 +144,17 @@ export default function StudentRegister() {
                          onChange={handleChange}/>
                     </div>
                     <div>
-                        <label className="block text-sm font-medium mb-2">Institute*</label>
-                        <input name="institute"
-                         type="text" 
-                         className="bg-white w-full border border-gray-300 px-4 py-2 rounded-md"
-                         onChange={handleChange} />
+                        <label className="block text-sm font-medium mb-2">Institute</label>
+                        <select
+                            name="institute"
+                            className="bg-white w-full border border-gray-300 px-4 py-2 rounded-md"
+                            onChange={handleChange}
+                            value={formData.institute}
+                        >
+                            <option value="">Select your institute</option>
+                            <option value="UniKL MIIT">UniKL MIIT</option>
+                            {/* Add more departments as needed */}
+                        </select>
                     </div>
                     <div>
                         <label className="block text-sm font-medium mb-2">University email*</label>

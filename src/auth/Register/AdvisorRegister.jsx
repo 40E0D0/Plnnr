@@ -5,102 +5,102 @@ import { supabase } from '../client';
 export default function AdvisorRegister() {
 
     const [formData, setFormData] = useState({
-        fullName:'', department:'', staffID:'', institute:'', email:'', password:'', phoneNo:'', confirmPassword:''
+        fullName: '', department: '', staffID: '', institute: '', email: '', password: '', phoneNo: '', confirmPassword: ''
     })
 
     const [errorMessage, setErrorMessage] = useState(""); //Sets error message at the bottom of the form
 
     const [isLoading, setIsLoading] = useState(false);    //Checks if registration is in process so the 
-                                                          //Register button can signify process is ongoing
+    //Register button can signify process is ongoing
 
     console.log(formData)
 
     //Replaces empty strings with user inputs
-    function handleChange(event){
-        setFormData((prevFormData)=>{
-            return {...prevFormData, [event.target.name]: event.target.value}
+    function handleChange(event) {
+        setFormData((prevFormData) => {
+            return { ...prevFormData, [event.target.name]: event.target.value }
         })
     }
 
     // Handling submission and adds user to Supabase
-    async function handleSubmit(e){
+    async function handleSubmit(e) {
         e.preventDefault()
         setIsLoading(true)
 
-    try {
-    // Checking if passwords match or not
-    if (formData.password !== formData.confirmPassword) {
-        setErrorMessage("Passwords do not match");
-        return; // Stop the function if passwords don't match
-    }
+        try {
+            // Checking if passwords match or not
+            if (formData.password !== formData.confirmPassword) {
+                setErrorMessage("Passwords do not match");
+                return; // Stop the function if passwords don't match
+            }
 
-    // Clear error message if validation passes
-    setErrorMessage("");
+            // Clear error message if validation passes
+            setErrorMessage("");
 
-    // Minimum password length
-    if (formData.password.length < 8) {
-        setErrorMessage("Password must be at least 8 characters long");
-        return;
-    }
+            // Minimum password length
+            if (formData.password.length < 8) {
+                setErrorMessage("Password must be at least 8 characters long");
+                return;
+            }
 
-    // Password complexity
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    if (!passwordRegex.test(formData.password)) {
-        setErrorMessage("Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character");
-        return;
-    }
-    // Checks if all fields are filled
+            // Password complexity
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            if (!passwordRegex.test(formData.password)) {
+                setErrorMessage("Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character");
+                return;
+            }
+            // Checks if all fields are filled
             const { data: authData, error: authError } = await supabase.auth.signUp(
                 {
-                  email: formData.email,
-                  password: formData.password,
-                  options: {
-                    data: {
-                      full_name: formData.fullName,
-                      staff_id: formData.staffID,
-                      department: formData.department,
-                      institute: formData.institute,
-                      phone_no: formData.phoneNo,
-                      confirm_password: formData.confirmPassword,
-                      role: 'Advisor'
-                    }
-                  }
-                }
-              );
-
-              if (authError) throw authError;
-
-        // Insert user data into the 'users' table
-        const { data: userData, error: userError } = await supabase
-            .from('users')
-            .insert([
-                {
-                    id: authData.user.id, // Use the user ID from the auth response
-                    full_name: formData.fullName,
-                    staff_id: formData.staffID || null,
-                    department: formData.department || null,
-                    institute: formData.institute || null,
                     email: formData.email,
-                    phone_no: formData.phoneNo,
-                    role: 'Advisor'
+                    password: formData.password,
+                    options: {
+                        data: {
+                            full_name: formData.fullName,
+                            staff_id: formData.staffID,
+                            department: formData.department,
+                            institute: formData.institute,
+                            phone_no: formData.phoneNo,
+                            confirm_password: formData.confirmPassword,
+                            role: 'Advisor'
+                        }
+                    }
                 }
-            ]);
+            );
 
-        if (userError) throw userError;
+            if (authError) throw authError;
 
-        // Log the inserted user data
-        console.log("Inserted user data:", userData);
+            // Insert user data into the 'users' table
+            const { data: userData, error: userError } = await supabase
+                .from('users')
+                .insert([
+                    {
+                        id: authData.user.id, // Use the user ID from the auth response
+                        full_name: formData.fullName,
+                        staff_id: formData.staffID || null,
+                        department: formData.department || null,
+                        institute: formData.institute || null,
+                        email: formData.email,
+                        phone_no: formData.phoneNo,
+                        role: 'Advisor'
+                    }
+                ]);
 
-              setIsLoading(false)
-              alert("Check your email for a verification link")
+            if (userError) throw userError;
+
+            // Log the inserted user data
+            console.log("Inserted user data:", userData);
+
+            setIsLoading(false)
+            alert("Check your email for a verification link")
 
         } catch (error) {
             setErrorMessage(error.message);  // Handles the error
             console.error(error);            // Optionally log the error for debugging
-            
-        }   finally {
+
+        } finally {
             setIsLoading(false) // Always reset loading state
-        }  
+        }
     }
 
     return (
@@ -111,78 +111,98 @@ export default function AdvisorRegister() {
                     <div>
                         <label className="block text-sm font-medium mb-2">Full name*</label>
                         <input name="fullName"
-                         type="text"
-                         className="bg-white w-full border border-gray-300 px-4 py-2 rounded-md"
-                         onChange={handleChange} />
+                            type="text"
+                            className="bg-white w-full border border-gray-300 px-4 py-2 rounded-md"
+                            onChange={handleChange} />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium mb-2">Phone number*</label>
-                        <input name="phoneNo" 
-                         type="tel"
-                         className="bg-white w-full border border-gray-300 px-4 py-2 rounded-md"
-                         onChange={handleChange} />
+                        <label className="block text-sm font-medium mb-2">Department</label>
+                        <select
+                            name="department"
+                            className="bg-white w-full border border-gray-300 px-4 py-2 rounded-md"
+                            onChange={handleChange}
+                            value={formData.department}
+                        >
+                            <option value="">Select a department</option>
+                            <option value="Computer Engineering Technology (CET)">Computer Engineering Technology (CET)</option>
+                            <option value="Creative Multimedia Technology (CMT)">Creative Multimedia Technology (CMT)</option>
+                            <option value="Cybersecurity & Technological Convergence (CTC)">Cybersecurity & Technological Convergence (CTC)</option>
+                            <option value="Informatics & Analytics (IA)">Informatics & Analytics (IA)</option>
+                            <option value="Software Engineering (SE)">Software Engineering (SE)</option>
+                            <option value="Visual Arts & Entertainment (VAE)">Visual Arts & Entertainment (VAE)</option>
+                            <option value="Student Development (SD)">Student Development (SD)</option>
+                            <option value="Technoputra (TECHNO)">Technoputra (TECHNO)</option>
+                            {/* Add more departments as needed */}
+                            {/* My SV suggested adding this and so far these are the depts. that lvl 3 got */}
+                        </select>
                     </div>
                     <div>
                         <label className="block text-sm font-medium mb-2">Staff ID*</label>
                         <input name="staffID"
-                         type="text" 
-                         className="bg-white w-full border border-gray-300 px-4 py-2 rounded-md"
-                         onChange={handleChange} />
+                            type="text"
+                            className="bg-white w-full border border-gray-300 px-4 py-2 rounded-md"
+                            onChange={handleChange} />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium mb-2">Password*</label>
-                        <input name="password"
-                         type="password" 
-                         className="bg-white w-full border border-gray-300 px-4 py-2 rounded-md"
-                         onChange={handleChange} />
+                        <label className="block text-sm font-medium mb-2">Institute</label>
+                        <select
+                            name="institute"
+                            className="bg-white w-full border border-gray-300 px-4 py-2 rounded-md"
+                            onChange={handleChange}
+                            value={formData.institute}
+                        >
+                            <option value="">Select your institute</option>
+                            <option value="UniKL MIIT">UniKL MIIT</option>
+                            {/* Add more departments as needed */}
+                        </select>
                     </div>
                     <div>
                         <label className="block text-sm font-medium mb-2">University email*</label>
                         <input name="email"
-                         type="email" 
-                         className="bg-white w-full border border-gray-300 px-4 py-2 rounded-md"
-                         onChange={handleChange} />
+                            type="email"
+                            className="bg-white w-full border border-gray-300 px-4 py-2 rounded-md"
+                            onChange={handleChange} />
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium mb-2">Password*</label>
+                        <input name="password"
+                            type="password"
+                            className="bg-white w-full border border-gray-300 px-4 py-2 rounded-md"
+                            onChange={handleChange} />
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium mb-2">Phone number*</label>
+                        <input name="phoneNo"
+                            type="tel"
+                            className="bg-white w-full border border-gray-300 px-4 py-2 rounded-md"
+                            onChange={handleChange} />
                     </div>
                     <div>
                         <label className="block text-sm font-medium mb-2">Confirm password*</label>
                         <input name='confirmPassword'
-                         type="password" 
-                         className="bg-white w-full border border-gray-300 px-4 py-2 rounded-md"
-                         onChange={handleChange} />
+                            type="password"
+                            className="bg-white w-full border border-gray-300 px-4 py-2 rounded-md"
+                            onChange={handleChange} />
                     </div>
-                    <div>
-                        <label className="block text-sm font-medium mb-2">Department</label>
-                        <input name='department'
-                         type="text" 
-                         className="bg-white w-full border border-gray-300 px-4 py-2 rounded-md"
-                         onChange={handleChange} />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium mb-2">Institute*</label>
-                        <input name='institute'
-                         type="text"
-                         className="bg-white w-full border border-gray-300 px-4 py-2 rounded-md"
-                         onChange={handleChange} />
-                    </div>
-                
-                <p className="text-xs text-red-600 mt-4">*required</p>
 
-                {/* Text Section */}
-                <div className="flex flex-col justify-center">
+                    <p className="text-xs text-red-600 mt-4">*required</p>
+
+                    {/* Text Section */}
+                    <div className="flex flex-col justify-center">
                         <p className="text-sm font-regular mt-6">Ensure all information entered is correct.</p>
                     </div>
 
-                <div className="mt-6 flex gap-4">
-                    <Link to="/register" className="bg-gray-400 text-black py-2 px-6 rounded-md hover:bg-gray-300 hover:text-black transition">
-                        Back
-                    </Link>
-                    <button type='submit' disabled={isLoading}  className="bg-blue-700 text-white py-2 px-6 rounded-md hover:bg-blue-500 hover:text-white transition">
-                        {isLoading ? "Registering..." : "Register"}
-                    </button>
-                </div>
+                    <div className="mt-6 flex gap-4">
+                        <Link to="/register" className="bg-gray-400 text-black py-2 px-6 rounded-md hover:bg-gray-300 hover:text-black transition">
+                            Back
+                        </Link>
+                        <button type='submit' disabled={isLoading} className="bg-blue-700 text-white py-2 px-6 rounded-md hover:bg-blue-500 hover:text-white transition">
+                            {isLoading ? "Registering..." : "Register"}
+                        </button>
+                    </div>
 
-                {/* Displaying error message at the bottom */}
-                {errorMessage && <p className="text-red-500 text-sm mt-2">{errorMessage}</p>}
+                    {/* Displaying error message at the bottom */}
+                    {errorMessage && <p className="text-red-500 text-sm mt-2">{errorMessage}</p>}
                 </form>
             </div>
         </main>

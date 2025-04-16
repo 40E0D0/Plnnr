@@ -21,7 +21,7 @@
   padding: 20px;
   align-items: center; /* Center content */
   justify-content: center; /* Center content vertically */
-  height: 100vh; /* Use full viewport height for proper vertical centering */
+  height: 100%; /* Use full viewport height for proper vertical centering */
 }
 
 .profile-page h1 {
@@ -38,11 +38,12 @@
 .profile-card .profile-field {
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px; /* Add uniform spacing between fields */
 }
 
 .profile-card label {
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   color: #555;
 }
 
@@ -83,6 +84,22 @@
 /*.profile-actions button:hover {
   background-color: #0056b3;
 }*/
+
+.avatar-container {
+  display: flex;
+  justify-content: center; /* Centers the image horizontally */
+  align-items: center;     /* Centers the image vertically */
+  height: 100px;           /* Set the height for the container */
+  width: 100px;            /* Set the width for the container */
+  margin: 0 auto;          /* Center the container within its parent element */
+}
+
+.avatar-preview {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
 
 .profile-actions button:disabled {
   background-color: #ccc;

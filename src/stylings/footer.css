@@ -1,0 +1,13 @@
+.footer {
+    position: sticky;
+    bottom: 0;
+    background-color: black; /* Set background color */
+    justify-content: center;
+    padding: 10px 50px; /* Add padding for spacing */
+    display: flex; /* Use flexbox to align logo and navigation horizontally */
+    align-items: center; /* Vertically center items */
+    font-family: 'Bahnschrift';
+    color:white;
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.1); /* Add drop shadow */
+    z-index: 0;
+}
